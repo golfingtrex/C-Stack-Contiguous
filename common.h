@@ -1,0 +1,1 @@
+/home/trent/cprog/life/common.h
