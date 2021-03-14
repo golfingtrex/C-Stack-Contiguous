@@ -11,7 +11,7 @@ void CreateStack(Stack *s); /* checked */
 void Push(StackEntry item, Stack *s);/* checked */
 void Pop(StackEntry *item, Stack *s);/* checked */
 void ClearStack(Stack *s); /* checked */
-void StackTop(StackEntry *item, Stack *s);
+void StackTop(StackEntry *item, Stack *s); /* checked */
 void TraverseStack(Stack *s, void (*Visit)()); /* checked */
 int StackSize(Stack *s);/* checked */
 Boolean StackEmpty(Stack *s);/* checked */
@@ -51,6 +51,7 @@ void Pop(StackEntry *item, Stack *s) {
         Error("Stack is empty");
     else {
         *item = s->entry[--s->top];
+        //printf("From POP: %c\n", *item);
         //printf("Top: %d", s->top);
         //printf("Top Char: %c\n", s->entry[s->top-1]);
     }
@@ -74,8 +75,17 @@ void ClearStack(Stack *s) {
 void StackTop(StackEntry *item, Stack *s) {
     if(StackEmpty(s))
         Error("Stack is empty");
-    else
-        *item = s->entry[s->top];
+    else {
+        *item = s->entry[s->top-1];
+        //printf("Top: %c\n", *item);
+        //printf("Height: %d\n", s->top);
+        /*Pop(item, s);
+        printf("TOP: %c\n", item);
+        Push(*item, s);
+        */
+
+
+    }
 }
 
 /* TraverseStack
@@ -89,6 +99,7 @@ void TraverseStack(Stack *s, void (*Visit)()) {
         Error("Stack is empty");
     else {
         for(int i=s->top; i>=0; i--)
+            //printf("%c\n", s->entry[i]);
             Visit();
     }
 }
