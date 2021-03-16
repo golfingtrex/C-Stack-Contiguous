@@ -12,7 +12,7 @@ void Push(StackEntry item, Stack *s);/* checked */
 void Pop(StackEntry *item, Stack *s);/* checked */
 void ClearStack(Stack *s); /* checked */
 void StackTop(StackEntry *item, Stack *s); /* checked */
-void TraverseStack(Stack *s, void (*Visit)()); /* checked */
+void TraverseStack(Stack *s, void (*Visit)(StackEntry)); /* checked */
 int StackSize(Stack *s);/* checked */
 Boolean StackEmpty(Stack *s);/* checked */
 Boolean StackFull(Stack *s);/* checked */
@@ -94,13 +94,13 @@ void StackTop(StackEntry *item, Stack *s) {
  *          in the stack, beginning with the entry at the top and proceeding
  *          toward the bottom of the stack.
  * */
-void TraverseStack(Stack *s, void (*Visit)()) {
+void TraverseStack(Stack *s, void (*Visit)(StackEntry)) {
     if(StackEmpty(s))
         Error("Stack is empty");
     else {
-        for(int i=s->top; i>=0; i--)
+        for(int i=0; i < s->top; i++)
             //printf("%c\n", s->entry[i]);
-            Visit();
+            (*Visit)(s->entry[i]);
     }
 }
 
